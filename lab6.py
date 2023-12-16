@@ -10,9 +10,11 @@ st.header(':grey[縣市每人平均月消費]', divider='rainbow')
 st.markdown('[*資料來源：行政院主計總處家庭收支調查*](https://www.stat.gov.tw/cp.aspx?n=3914)')
 
 cost = pd.read_csv(file_path, encoding='utf-8')
-columns = cost.columns
-options = st.multiselect('選擇想要顯示的縣市...', columns, default=["年別"])
-st.subheader(f'表1：民國 {cost["年別"].iloc[0]} 至 {cost["年別"].iloc[-1]} 年', divider='grey')
-#st.dataframe(cost[options])
-st.write(cost[options])
+
+city = st.multiselect('選擇想要顯示的**縣市**...', cost.columns, default=["年別"])
+year_range = st.slider('選擇想要顯示的**年份**...', cost['年別'].unique()[0], cost['年別'].unique()[-1], (100, 101), step=1)
+year = [i for i in range(year_range[0], year_range[1]+1, 1)]
+
+st.subheader(f'表1：民國 {year_range[0]} 至 {year_range[1]} 年', divider='grey')
+st.write(cost[cost["年別"].isin(year)][city])
 st.divider()
