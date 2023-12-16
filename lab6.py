@@ -31,33 +31,9 @@ st.divider()
 font_manager.fontManager.addfont(font_file)
 matplotlib.rcParams['font.family'] = ['jf-openhuninn-2.0', 'sans-serif']
 
-col1, col2 = st.columns(2)
 
-# 長條圖
-with col1:
-    st.pyplot(cost_select.plot(x='年別', kind='bar',title='長條圖').legend(bbox_to_anchor=(1.0, 1.0), fontsize='small').figure)
-
-# 堆疊長條圖
-with col2:
-    st.pyplot(cost_select.plot(x='年別', kind='bar',title='堆疊長條圖', stacked=True).legend(bbox_to_anchor=(1.0, 1.0), fontsize='small').figure)
+st.bar_chart(cost_select, x='年別')
 st.divider()
 
-col1, col2 = st.columns(2)
-# 面積圖
-with col1:
-    st.pyplot(cost_select.plot(x='年別', kind='area',title='面積圖', stacked=False).legend(bbox_to_anchor=(1.0, 1.0), fontsize='small').figure)
-
-# 堆疊長條圖
-with col2:
-    st.pyplot(cost_select.plot(x='年別', kind='area',title='堆疊面積圖', stacked=True).legend(bbox_to_anchor=(1.0, 1.0), fontsize='small').figure)
-st.divider()
-
-col1, col2 = st.columns(2)
-# 折線圖
-with col1:
-    st.pyplot(cost_select.plot(x='年別', kind='line',title='折線圖').legend(bbox_to_anchor=(1.0, 1.0), fontsize='small').figure)
-
-# 折線圖，變換線條形式
-with col2:
-    st.pyplot(cost_select.plot(x='年別', kind='line',title='折線圖-o', style='-o').legend(bbox_to_anchor=(1.0, 1.0), fontsize='small').figure)
+st.line_chart(cost_select, x='年別')
 st.divider()
